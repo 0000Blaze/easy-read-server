@@ -76,6 +76,8 @@ def returner():
             Say, boy, let's not talk too much
             Grab on my waist and put that body on me'''
     
+    #pritn output from OCR
+    print(text)
     # process TTS
     textToSpeech(text)
 
