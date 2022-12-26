@@ -7,7 +7,7 @@ public class BinarizeForServer
     
     public static void test()
     {
-        binarizeAndSave("a.jpg", "tempa.jpg");
+        binarizeAndSave("a.jpg", "tempqqa.jpg");
     }
         
     public static void binarizeAndSave(String imagepath, String savepath)

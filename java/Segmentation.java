@@ -52,7 +52,7 @@ public class Segmentation {
             for (int i = 0; i < IMG_X; i++) {
                 System.out.print(image.pixel[i][j] + " ");
             }
-            System.out.println();
+            // System.out.println();
         }
     }
 
@@ -176,7 +176,7 @@ public class Segmentation {
                 count++;
             }
         }
-        System.out.println("components = " + count);
+        // System.out.println("components = " + count);
     }
 
     public void drawRectangles() {

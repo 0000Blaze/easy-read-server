@@ -58,6 +58,7 @@ def returner():
     # process OCR with tesseract
     myconfig = r"--psm 6 --oem 3"
     try:
+        print("Working on TTS")
         text = pytesseract.image_to_string(img,config=myconfig)
     except:
         text ='''Hello from server, This is a test song
