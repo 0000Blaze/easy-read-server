@@ -1,7 +1,6 @@
 import io
 import base64
 import logging
-# import numpy as np
 from PIL import Image
 import subprocess
 from tts import textToSpeech
@@ -58,7 +57,7 @@ def returner():
     myconfig = r"--psm 6 --oem 3"
     try:
         print("Working on pytessaract OCR")
-#        # text = pytesseract.image_to_string(img,config=myconfig)
+        text = pytesseract.image_to_string(img,config=myconfig)
     except:
         text ='''Hello from server, This is a test song
             The club isn't the best place to find a lover
@@ -77,11 +76,11 @@ def returner():
             Grab on my waist and put that body on me'''
     
     #pritn output from OCR
-    # print(text)
+    print(text)
     # process TTS
     print("Working on TTS")
     
- #   # textToSpeech(text)
+    textToSpeech(text)
 
     #response
     data ={
