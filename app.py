@@ -9,8 +9,7 @@ from server_try import printStdoutLog,printStderrLog
 
 import pytesseract
 
-from flask import Flask, request, abort, jsonify, Response
-#from flask import send_file
+from flask import Flask, request, abort, jsonify,send_file
 
 app = Flask(__name__)
 app.logger.setLevel(logging.DEBUG)
@@ -59,7 +58,7 @@ def returner():
     myconfig = r"--psm 6 --oem 3"
     try:
         print("Working on pytessaract OCR")
-        text = pytesseract.image_to_string(img,config=myconfig)
+#        # text = pytesseract.image_to_string(img,config=myconfig)
     except:
         text ='''Hello from server, This is a test song
             The club isn't the best place to find a lover
@@ -78,10 +77,11 @@ def returner():
             Grab on my waist and put that body on me'''
     
     #pritn output from OCR
-    print(text)
+    # print(text)
     # process TTS
     print("Working on TTS")
-    textToSpeech(text)
+    
+ #   # textToSpeech(text)
 
     #response
     data ={
@@ -90,17 +90,11 @@ def returner():
 
     print("Successful")
     return jsonify(data)
-    #return send_file(audioFilepath, mimetype="audio/wav", as_attachment=True, attachment_filename="response.wav")
+    
 
-@app.route("/wav")
+@app.route("/mpeg")
 def streamwav():
-    def generate():
-        with open("response.wav", "rb") as fwav:
-            data = fwav.read(1024)
-            while data:
-                yield data
-                data = fwav.read(1024)
-    return Response(generate(), mimetype="audio/x-wav")
+    return send_file("./response.mp3",mimetype="audio/mpeg",as_attachment=True)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)

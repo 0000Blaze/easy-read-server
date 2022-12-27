@@ -4,7 +4,7 @@ import gtts
 
 def textToSpeech(sentence):
 	tts = gtts.gTTS(str(sentence))
-	tts.save("response.wav")
+	tts.save("response.mp3")
 
 # textToSpeech('''Hello from server, This is a test song
 #             The club isn't the best place to find a lover
@@ -26,29 +26,6 @@ def textToSpeech(sentence):
 #             I'm in love with the shape of you
 #             We push and pull like a magnet do
 #             Although my heart is falling too
-#             I'm in love with your body
-#             And last night you were in my room
-#             And now my bedsheets smell like you
-#             Every day discovering something brand new
-#             I'm in love with your body
-#             Oh-I-oh-I-oh-I-oh-I
-#             I'm in love with your body
-#             Oh-I-oh-I-oh-I-oh-I
-#             I'm in love with your body
-#             Oh-I-oh-I-oh-I-oh-I
-#             I'm in love with your body
-#             Every day discovering something brand new
-#             I'm in love with the shape of you
-#             One week in we let the story begin
-#             We're going out on our first date
-#             You and me are thrifty, so go all you can eat
-#             Fill up your bag and I fill up a plate
-#             We talk for hours and hours about the sweet and the sour
-#             And how your family is doing okay
-#             Leave and get in a taxi, then kiss in the backseat
-#             Tell the driver make the radio play, and I'm singing like
-#             Girl, you know I want your love
-#             Your love was handmade for somebody like me
 #             Come on now, follow my lead
 #             I may be crazy, don't mind me
 #             Say, boy, let's not talk too much
