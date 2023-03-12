@@ -2,7 +2,8 @@ import io
 import base64
 import logging
 from PIL import Image
-from tts import textToSpeech
+import cv2
+# from tts import textToSpeech  #gtts program
 from server_try import runJavaProgram
 from ravitts import textToSpeech2
 
@@ -35,7 +36,7 @@ def returner():
 
     binarization_program_name = "BinarizeForServer"
     noisereducer_program_name = "NoiseReducerForServer"
-    readingorder_program_name = "TopDownSegmentorForServer"
+    readingorder_program_name = "TopDownSegmenterForServer"
 
     # run the Java program
     print("Waiting for Binarization to complete")
