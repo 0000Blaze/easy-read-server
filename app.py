@@ -5,6 +5,7 @@ from PIL import Image
 import subprocess
 from tts import textToSpeech
 from server_try import printStdoutLog,printStderrLog
+from ravitts import textToSpeech2
 
 import pytesseract
 
@@ -80,8 +81,10 @@ def returner():
     # process TTS
     print("Working on TTS")
     
-    textToSpeech(text)
+    # textToSpeech(text)
+    textToSpeech2(text)
 
+  
     #response
     data ={
         "content":"Successful,"
