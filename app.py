@@ -78,6 +78,8 @@ def returner():
     
     #pritn output from OCR
     print(text)
+    with open('text.txt', 'w') as f:
+        f.writelines(text)
     # process TTS
     print("Working on TTS")
     
