@@ -4,11 +4,6 @@ public class BinarizeForServer
     {
         binarizeAndSave(args[0], args[1]);
     }
-    
-    public static void test()
-    {
-        binarizeAndSave("a.jpg", "tempqqa.jpg");
-    }
         
     public static void binarizeAndSave(String imagepath, String savepath)
     {
@@ -21,12 +16,11 @@ public class BinarizeForServer
         sauv.setImage(srcimg);
         sauv.binarize();
         
-        Image dilatedImage = ImageUtility.dilate(sauv.getBinarizedImage(), 5);
-        
-        Segmentation segmentation = new Segmentation(dilatedImage);
-        segmentation.segment();
+        //perform open-close operation for preliminary noise removal
+        Image openedImage = ImageUtility.open(sauv.getBinarizedImage(), 3);
+        Image closedImage = ImageUtility.close(openedImage, 3);
         
         //save binarized image
-        ImageUtility.writeImage(dilatedImage, savepath);
+        ImageUtility.writeImage(closedImage, savepath);
     }
 }
