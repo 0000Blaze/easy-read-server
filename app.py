@@ -2,9 +2,8 @@ import io
 import base64
 import logging
 from PIL import Image
-import subprocess
 from tts import textToSpeech
-from server_try import printStdoutLog,printStderrLog
+from server_try import runJavaProgram
 from ravitts import textToSpeech2
 
 import pytesseract
@@ -30,35 +29,45 @@ def returner():
     
     #binarization DC
     imagepath = "picture.jpg" #provide complete path of the saved image that is to be provided to the java ocr program
-    binimagepath = "temp.jpg" #provide name of file where to save the output binarized image
+    binimagepath = "tempb.jpg" #provide name of file where to save the output binarized image
+    noisereducedimagepath = "tempb.jpg" #provide name of file where to save the noise reduced output binarized image
+    readingordertextfile = "readingorder.txt" #provide name of file where to save the reading order text file
+
     binarization_program_name = "BinarizeForServer"
+    noisereducer_program_name = "NoiseReducerForServer"
+    readingorder_program_name = "TopDownSegmentorForServer"
 
     # run the Java program
-    process = subprocess.Popen(["java", binarization_program_name, imagepath, binimagepath], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
     print("Waiting for Binarization to complete")
+    runJavaProgram(binarization_program_name, [imagepath, binimagepath])
+    #print("Waiting for Noise Reduction to complete")
+    #runJavaProgram(noisereducer_program_name, [binimagepath, noisereducedimagepath])
+    print("Waiting for Reading Order Determination to complete")
+    runJavaProgram(readingorder_program_name, [noisereducedimagepath, readingordertextfile])
 
-    # wait for the Java program to finish ##not needed when using subprocess.run() as it blocks by default (though it sets system call parameters to not block)
-    process.wait()
-
-
-    # check the return code to see if the java process completed successfully
-    if process.returncode != 0:
-        print("Java program failed with error code: ", process.returncode)
-        printStderrLog(process)
-        printStdoutLog(process)
-    else:
-        print("Java program finished successfully")
-        printStdoutLog(process)
-        #the output from java program is path to the binarized image file
-
-    img = Image.open(binimagepath)
 
     # process OCR with tesseract
     myconfig = r"--psm 6 --oem 3"
     try:
         print("Working on pytessaract OCR")
-        text = pytesseract.image_to_string(img,config=myconfig)
+        img = cv2.imread(noisereducedimagepath)
+        f = open(readingordertextfile)
+        lines = f.readlines()
+        #remove metadatas
+        lines.pop(0)
+        lines.pop(0)
+        
+        text = ''
+        for line in lines:
+          bounds = line.strip().split(',')
+          x1 = int(bounds[0])
+          x2 = int(bounds[1]) + 1   
+          y1 = int(bounds[2])
+          y2 = int(bounds[3]) + 1
+          img_cropped = img[y1:y2, x1:x2]
+          convString = pytesseract.image_to_string(img_cropped)
+          text += " " + convString
+        f.close()
     except:
         text ='''Hello from server'''
     
