@@ -3,9 +3,9 @@ import base64
 import logging
 from PIL import Image
 import cv2
-# from tts import textToSpeech  #gtts program
+from tts import textToSpeech  #gtts program
 from server_try import runJavaProgram
-from ravitts import textToSpeech2
+# from ravitts import textToSpeech2 #pyttsx3 program
 
 import pytesseract
 
@@ -81,8 +81,8 @@ def returner():
     # process TTS
     print("Working on TTS")
     
-    # textToSpeech(text)
-    textToSpeech2(text)
+    textToSpeech(text)  #gtts
+    # textToSpeech2(text)   #pyttsx3
 
     #response
     data ={
