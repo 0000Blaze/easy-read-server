@@ -31,30 +31,33 @@ def returner():
     #binarization DC
     imagepath = "picture.jpg" #provide complete path of the saved image that is to be provided to the java ocr program
     binimagepath = "tempb.jpg" #provide name of file where to save the output binarized image
-    noisereducedimagepath = "tempb.jpg" #provide name of file where to save the noise reduced output binarized image
+    noisereducedimagepath = "tempn.jpg" #provide name of file where to save the noise reduced output binarized image
     readingordertextfile = "readingorder.txt" #provide name of file where to save the reading order text file
+    postnoisereducedimagepath = "tempp.jpg" #provide name of file where to save the noise reduced output binarized image
 
     binarization_program_name = "BinarizeForServer"
     noisereducer_program_name = "NoiseReducerForServer"
     readingorder_program_name = "TopDownSegmenterForServer"
+    postnoisereducer_program_name = "PostNoiseReducerForServer"
 
     # run the Java program
-    print("Waiting for Binarization to complete")
+    #print("Waiting for Binarization to complete")
     runJavaProgram(binarization_program_name, [imagepath, binimagepath])
-    #print("Waiting for Noise Reduction to complete")
-    #runJavaProgram(noisereducer_program_name, [binimagepath, noisereducedimagepath])
-    print("Waiting for Reading Order Determination to complete")
+    # print("Waiting for Noise Reduction to complete")
+    runJavaProgram(noisereducer_program_name, [binimagepath, noisereducedimagepath])
+    #print("Waiting for Reading Order Determination to complete")
     runJavaProgram(readingorder_program_name, [noisereducedimagepath, readingordertextfile])
+    runJavaProgram(postnoisereducer_program_name, [noisereducedimagepath, readingordertextfile,postnoisereducedimagepath])
 
 
     # process OCR with tesseract
-    myconfig = r"--psm 6 --oem 3"
+    myconfig = r"--psm 6"
     try:
-        print("Working on pytessaract OCR")
-        img = cv2.imread(noisereducedimagepath)
+        '''print("Working on pytessaract OCR")
+        img = cv2.imread(postnoisereducedimagepath)
         f = open(readingordertextfile)
         lines = f.readlines()
-        #remove metadatas
+        # remove metadatas
         lines.pop(0)
         lines.pop(0)
         
@@ -66,9 +69,16 @@ def returner():
           y1 = int(bounds[2])
           y2 = int(bounds[3]) + 1
           img_cropped = img[y1:y2, x1:x2]
-          convString = pytesseract.image_to_string(img_cropped)
-          text += " " + convString
-        f.close()
+          #ar = (x2-x1)/(y2-y1)
+          height = x2 - x1
+          width = y2 -y1
+          borderWidth = min((int)(min(height, width) * 0.25), 20)
+          img_border_added = cv2.copyMakeBorder(img_cropped, borderWidth,borderWidth,borderWidth,borderWidth, cv2.BORDER_CONSTANT,value=[255,255,255])
+          convString = pytesseract.image_to_string(img_border_added,lang='eng',config = myconfig)
+          text += " " + convString.strip()'''
+        # f.close()
+        text = pytesseract.image_to_string(img,lang='eng', config = myconfig)
+        text.strip()
     except:
         text ='''Hello from server'''
     

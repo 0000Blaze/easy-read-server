@@ -16,6 +16,17 @@ public class Image
         type = _type;
     }
     
+    public Image getCroppedImage(int minX, int maxX, int minY, int maxY)
+    {
+        Image croppedImage = new Image(maxX - minX + 1, maxY - minY + 1,this.type);
+        for (int i = 0; i < croppedImage.getWidth(); i++) {
+            for (int j = 0; j < croppedImage.getHeight(); j++) {
+                croppedImage.pixel[i][j] = pixel[i + minX][j + minY];
+            }
+        }
+        return croppedImage;
+    }
+    
     public Image(Image _image)
     {
         initialize(_image.getWidth(), _image.getHeight(), _image.getType());
@@ -51,6 +62,18 @@ public class Image
     
     public int getMaxY()
     { return sizeY -1; }
+    
+    public void logicalAnd(Image image)
+    {//perform pixelwise subtraction
+        if(image.getType() != TYPE.BIN || this.type != TYPE.BIN )
+        {
+            System.out.println("Cannot logical-and unbinarized Image!");
+            return;
+        }
+        for (int i = 0; i < sizeX; i++) 
+            for (int j = 0; j < sizeY; j++)
+                pixel[i][j] = pixel[i][j] & image.pixel[i][j];
+    }
     
     public void subtract(Image image)
     {
