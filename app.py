@@ -53,9 +53,9 @@ def returner():
     # process OCR with tesseract
     myconfig = r"--psm 6"
     try:
-        '''print("Working on pytessaract OCR")
+        print("Working on pytessaract OCR")
         img = cv2.imread(postnoisereducedimagepath)
-        f = open(readingordertextfile)
+        '''f = open(readingordertextfile)
         lines = f.readlines()
         # remove metadatas
         lines.pop(0)
