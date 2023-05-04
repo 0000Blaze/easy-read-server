@@ -21,6 +21,7 @@ def returner():
     if not request.json or 'image' not in request.json: 
         abort(400)
     # get the base64 encoded string
+    print("Image received")
     im_b64 = request.json['image']
     # convert it into bytes  
     img_bytes = base64.b64decode(im_b64.encode('utf-8'))
@@ -75,12 +76,12 @@ def returner():
           borderWidth = min((int)(min(height, width) * 0.25), 20)
           img_border_added = cv2.copyMakeBorder(img_cropped, borderWidth,borderWidth,borderWidth,borderWidth, cv2.BORDER_CONSTANT,value=[255,255,255])
           convString = pytesseract.image_to_string(img_border_added,lang='eng',config = myconfig)
-          text += " " + convString.strip()'''
-        # f.close()
+          text += " " + convString.strip()
+        f.close()'''
         text = pytesseract.image_to_string(img,lang='eng', config = myconfig)
         text.strip()
     except:
-        text ='''Hello from server'''
+        text ='''Please try again'''
     
     # print output from OCR
     print(text)

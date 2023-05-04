@@ -1,0 +1,18 @@
+Abstract
+
+Most of the information we perceive is through our vision. Visual impairment can hamper
+day to day task performing capability of an individual and among one of such crucial task is
+learning. On this note. to provide an aid in independent learning for visually impaired per-
+son, the system has been developed. The system captures image of textual documents using
+# mobile application. As the image is captured by people who are visually challenged. the
+image is likely to have distortions such as shadows and uneven illuminations. The captured
+Image is sent to a remote server for pre-processing, involving binarization. noise reduction.
+and layout analysis to make it suitable for OCR processing. The pre-processed image is fed
+to an OCR engine to obtain textual format. The extracted text is then used to generate
+speech as final output, enabling people to hear the text in the captured image.
+
+Keywords: Visually impaired. Learning aid. OCR. Binarization. Notse removal. Layout
+Analysis
+
+4
+

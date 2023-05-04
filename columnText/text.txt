@@ -1,0 +1,83 @@
+ The Eighth IAPR Workshop on Document Analysis Systems A Complete Optical Character Recognition
+Documents Methodology for Historical G.Vamvakas, B.Gatos, N. Stamatopoulos, and §.J.Perantonis
+Computational Intelligence Laboratory, Institute of Informatics and Telecommunications,
+National C enter for Scientific Research “Demokritos ".
+
+GR-153 10 Agia Paraskevi, Athens, Greece
+Attp:/www.iit.demokritos.gr/cil/,
+
+‘gbam, bgat, nstam, sper}@iit.demokritos.gr oe
+” %
+,
+“t  Abstract In this paper a coniplete OCR methodology for
+recognizing historical documents, either printed or
+handwritten without any knowledge of the font, is
+presented. This methodology consists of three steps:
+The first tvo steps refer to creating a database for
+rraintng using a set of documents, while the third one
+refers to recognition of new document images. First, a
+pre-processing step that includes image binarization
+and enhancement takes place. At a second step a top -
+down segmentation approach ts used in order to detect
+text lines, words and characters. A clustering scheme
+is then adopted in order to group characters of similar
+shape. This is a semi-automatic procedure since the
+
+user ts able to interact at any time in order to correct
+possible errors of clustering and assign an ASCH
+label. After this step, a database is created in order to
+be used for recognition. Finally, in the third step, for
+every’ new document image the above segmentation
+approach takes place while the recognition is bused on
+the character database that has been produced at the previous step. 1. Introduction The large amount of documents, cither modern or
+historical, that we have in our possession nowadays,
+due to the expansion of digital libraries, has pointed
+out the need for reliable and accurate systems for
+processing them. Historical documents are of more
+importance because they are a significant part of our
+cultural heritage. During the last decades a lot of
+research has been done in the field of Optical
+Character Recognition (OCR). Numerous commercial
+products have been released that convert digitized documents into text files. usually in ASCIL format.
+
+Although these products process machine ponted
+
+documents successfully, when it comes to handwritten
+
+documents the results are not satisfactory enough.
+Moreover. such products are unable to process
+historical documents due to their low quality. lack of
+standard alphabets and presence of unknown fonts.To
+this end, recognition of historical documents 1s one of
+the most challenging tasks in OCR.
+
+In the literature, historical document processing 1s
+mainly focused on document retrieval. Word-spoturg
+techniques for searching and indexing histoncal
+documents have been introduced. In [1]. word images
+ire grouped into clusters of similar words by using
+image matching to find similarity. Then. by annotaung
+“interesting” clusters. an index that links words te the
+locauons where they occur can be built automaticail.
+In [2] and [3] holistic word recognition approaches for
+historical documents are presented based on scalar and
+profile-based features and on matching word conteurs
+respectively. Their goal is to produce reasonable
+recognition accuracies which enable performing
+retrieval of handwritten pages trom a user-supphied
+ASCII query. In [4]. a word spotting technique based
+on combing synthetic data and user teed-back for
+keyword searching in historical printed documents is
+deseribed. However, transtorming whole historical documents
+into text Hles is amuch more difMeult task. To the best
+of our knowledge. there are neta let of works
+following this approach. Moreover. all related works
+tend to be focused on the unique characteristics of the
+correspond historical document they process, such
+as content and writing style. In |S} and lo]. OCR
+systems were developed Iespectively for the
+recopmbion of characters used in’ the Christian
+Orthodox Church Musie notation. In [7]. a Th "HOS. 3337-7 0K S25 00 KR IFFE
+Ob 1 1109 DAS 2008.73 A345 ti-
+‘computer
+Q
