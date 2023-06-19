@@ -15,3 +15,4 @@
 
 ## Easy Read mobile app
 - https://github.com/0000Blaze/EasyRead
+- Mobile client application developed in React Native Expo Framework
